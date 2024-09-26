@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}NOTICIAS{% endblock titulo %}
+
+
+{% block contenido %}
+	<div class="submenu">
+
+		<a href="{% url 'noticias:listar' %}">TODAS</a>
+		{% for cat in categorias %}
+			<a href="?id={{cat.pk}}"> {{cat.nombre}} </a>
+		{% endfor %}
+
+	</div>
+	
+		<div class="container">
+			<div class="d-flex flex-wrap justify-content-center">
+			{% for noti in noticias %}
+			 <div class="col-12 col-lg-4 col-lx-3">
+				<div class="card m-4">
+					<img class="card-img-top" height="200px" src="{{noti.imagen.url}}">
+						
+					<div class="card-body">
+						<h5 class="card-title">
+							<a class="card-link" href="{% url 'noticias:detalle' noti.pk %}">{{noti.titulo}}</a>
+						</h5>
+						
+						<span class="d-inline-block text-truncate" style="max-width:80%;">
+							{{noti.cuerpo}}	
+						</span>
+					</div>
+					
+					<div class="card-footer">
+						<p class="fs-6 text-muted fw-light">{{noti.fecha}}</p>
+						<cite title="Título fuente">{{noti.categoria_noticia}}</cite>
+						<br>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+			</div>
+		</div>
+	
+
+{% endblock contenido %}
+
+
+
