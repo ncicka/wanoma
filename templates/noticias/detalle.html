@@ -5,14 +5,15 @@
 
 
 {% block contenido %}
-	<h1>ACA VOY A DETALLAR UNA NOTICIA</h1>
 		<img src="{{noticia.imagen.url}}" width="500" height="500">
 		
-		<p>TITULO: {{noticia.titulo}}</p>
+		<h1>{{noticia.titulo}}</h1>
 		
-		<p>FECHA: {{noticia.fecha}}</p>
+		<h6>FECHA: {{noticia.fecha}}</h6>
 		<p>CATEGORIA: {{noticia.categoria_noticia}}</p>
-		<p>CUERPO: {{noticia.cuerpo}}</p>
+		<div class="col-md-12">
+            {{noticia.cuerpo|safe}}
+		<div>
 		<br><br>
 		<br>
 		<form method="POST" action="{% url 'noticias:comentar' %}">{% csrf_token %}

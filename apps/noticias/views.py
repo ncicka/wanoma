@@ -6,6 +6,9 @@ from .models import Noticia, Categoria, Comentario
 
 from django.urls import reverse_lazy
 
+from django.views.generic.edit import UpdateView
+from .forms import EditarNoticiaForm
+
 #@login_required
 def Listar_Noticias(request):
 	contexto = {}
@@ -47,6 +50,13 @@ def Comentar_Noticia(request):
 	coment = Comentario.objects.create(usuario = usu, noticia = noticia, texto = com)
 
 	return redirect(reverse_lazy('noticias:detalle', kwargs={'pk': noti}))
+
+class Editar_Noticia(UpdateView):
+	model=Noticia
+	form_class = EditarNoticiaForm
+#	fields= [ 'titulo','cuerpo']
+	success_url= reverse_lazy('noticias:listar')
+	template_name= 'noticias/editar.html'
 
 #{'nombre':'name', 'apellido':'last name', 'edad':23}
 #EN EL TEMPLATE SE RECIBE UNA VARIABLE SEPARADA POR CADA CLAVE VALOR

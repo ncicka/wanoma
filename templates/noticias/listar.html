@@ -14,33 +14,39 @@
 
 	</div>
 	
-		<div class="container">
-			<div class="d-flex flex-wrap justify-content-center">
+		<section class="d-flex flex-wrap">
 			{% for noti in noticias %}
-			 <div class="col-12 col-lg-4 col-lx-3">
+			 <div class="col-12 col-lg-3 col-lx-3">
 				<div class="card m-4">
 					<img class="card-img-top" height="200px" src="{{noti.imagen.url}}">
 						
 					<div class="card-body">
-						<h5 class="card-title">
-							<a class="card-link" href="{% url 'noticias:detalle' noti.pk %}">{{noti.titulo}}</a>
+						<h5>
+							<a class="card-title" href="{% url 'noticias:detalle' noti.pk   %}">{{noti.titulo}}</a>
 						</h5>
 						
-						<span class="d-inline-block text-truncate" style="max-width:80%;">
-							{{noti.cuerpo}}	
-						</span>
+						<h6 class="card-subtitle text-muted">
+							<span class="d-inline-block" style="max-width:80%;">
+								{{noti.cuerpo|safe|truncatechars:100}}	
+							</span>
+						</h6>
 					</div>
 					
 					<div class="card-footer">
-						<p class="fs-6 text-muted fw-light">{{noti.fecha}}</p>
-						<cite title="Título fuente">{{noti.categoria_noticia}}</cite>
-						<br>
+						<div class="d-flex justify-content-around">
+							<p class="text-muted fw-light" > 
+								<small class="text-muted">Publicado por: </small>
+								{{noti.fecha}}
+							</p>
+						</div>
+						<div><cite title="Categoría">{{noti.categoria_noticia}}</cite></div>
+						<div> <a class="btn btn-info" href="{% url 'noticias:editar' noti.pk %}">Editar</a>
+						 </div>
 					</div>
 				</div>
 			</div>
 			{% endfor %}
-			</div>
-		</div>
+		</section>
 	
 
 {% endblock contenido %}

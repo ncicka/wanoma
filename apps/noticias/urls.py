@@ -11,5 +11,7 @@ urlpatterns = [
 	path('Detalle/<int:pk>', views.Detalle_Noticias, name = 'detalle'),
 	
 	path('Comentario/', views.Comentar_Noticia, name = 'comentar'),
+    
+	path('<pk>/Editar', views.Editar_Noticia.as_view(), name = 'editar'),
 	
 ]
