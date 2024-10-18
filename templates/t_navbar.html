@@ -46,9 +46,10 @@
                 >
                 <div class="dropdown-menu" aria-labelledby="dropdownId">
                     {% if user.is_authenticated %}
+                        <a class="dropdown-item" href="{% url 'usuarios:editar' %}">Perfil</a>
                         <a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a>
                     {% else %}
-                        <a class="dropdown-item" href="{% url 'login' %}">Iniciar sesión</a>
+                        <a class="dropdown-item" href="{% url 'usuarios:login' %}">Iniciar sesión</a>
                         <a class="dropdown-item" href="{% url 'usuarios:registro' %}">Registrarse</a>
                     {% endif %}
                 </div>
