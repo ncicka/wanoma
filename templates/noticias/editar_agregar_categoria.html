@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}{{titulo}}{% endblock titulo %}
+
+
+{% block contenido %}
+	<h1>{{titulo}}</h1>
+
+		<form enctype="multipart/form-data" method="POST">{% csrf_token %}
+            {{form.as_p}}
+ 
+			<input type="submit" value="GUARDAR">
+		</form>
+		<a href="{% url 'noticias:categoria' %}">Volver</a>
+{% endblock contenido %}
+

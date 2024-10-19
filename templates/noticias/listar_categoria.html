@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}CATEGORIAS{% endblock titulo %}
+
+
+{% block contenido %}
+
+    <h1>{{titulo}}</h1>
+	<div class="submenu">
+		{% if perms.noticia.add_categoria %}
+			<a class="button primary-button" href="{% url 'noticias:agregarcategoria' %}">Agregar Categoria</a>
+            <a href="{% url 'noticias:listar' %}">Volver</a>
+		{% endif %}
+
+	</div>
+        <h4> LISTA DE CATEGORIAS </h4>
+	
+        	 <div class="row">
+                {% for cat in categorias %}
+                    <p class="card-title" >{{cat.nombre}}</p>
+                    {% if perms.noticia.update_categoria %}
+                        <a href="{% url 'noticias:editarcategoria' cat.pk %}">Modificar</a>
+                    {% endif %}
+                    {% if perms.noticia.delete_categoria %}
+                        <a href="{% url 'noticias:borrarcategoria' cat.pk %}">Borrar</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+	
+            
+{% endblock contenido %}
+
+
+

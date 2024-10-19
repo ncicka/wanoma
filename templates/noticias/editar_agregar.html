@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}{{titulo}}{% endblock titulo %}
+
+
+{% block contenido %}
+	<h1>{{titulo}}</h1>
+
+		<form enctype="multipart/form-data" method="POST">{% csrf_token %}
+            <!-- {{form.as_p}} -->
+			<div class="col-md-12 form-group">
+				{{ form.titulo.label_tag }}
+				{{ form.titulo }}
+			</div>
+			<br>
+			<div class="col-md-12 form-group">
+				{{ form.cuerpo.label_tag }}
+				{{ form.cuerpo }}
+			</div>
+			<br>
+			<div class="col-md-12 form-group">
+				<div class="col-md-6">
+				{{ form.categoria_noticia.label_tag }}
+				{{ form.categoria_noticia }}
+				</div>	
+				<div class="col-md6">
+					{% if perms.noticia.add_categoria %}
+						<a href="{% url 'noticias:agregarcategoria' %}">Agregar Categoria</a>
+					{% endif %}
+				</div>
+			</div>
+			<br>
+			<div class="col-md-12 form-group">
+				{{ form.imagen.label_tag }}
+				{{ form.imagen }}
+			</div>
+			<br>
+			<!-- {{form.titulo}}
+
+			{{form.cuerpo}}
+
+			{{form.categoria}}
+
+			{{form.imagen}} -->
+
+			<input type="submit" value="GUARDAR">
+		</form>
+		
+		<a href="{% url 'noticias:listar' %}">Volver</a>
+{% endblock contenido %}
+

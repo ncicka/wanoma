@@ -12,11 +12,11 @@ class Noticia(models.Model):
 
 	titulo = models.CharField(max_length = 150, verbose_name='Título')
 	#cuerpo = models.TextField(verbose_name='Texto de la noticia')
-	cuerpo = RichTextField()
+	cuerpo = RichTextField(verbose_name='Texto de la noticia')
 	imagen = models.ImageField(upload_to = 'noticias', verbose_name='Imagen')
 	categoria_noticia = models.ForeignKey(Categoria, on_delete = models.CASCADE)
 	fecha = models.DateTimeField(auto_now_add=True)
-	#autor = models.ForeignKey(Usuario, on_delete = models.CASCADE)
+	autor = models.ForeignKey(Usuario, on_delete = models.CASCADE, default=1)
 
 	def __str__(self):
 		return self.titulo

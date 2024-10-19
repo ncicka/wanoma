@@ -12,6 +12,10 @@
 			<a href="?id={{cat.pk}}"> {{cat.nombre}} </a>
 		{% endfor %}
 
+		{% if perms.noticia.add_noticia %}
+			<a class="button primary-button" href="{% url 'noticias:agregar' %}">Agregar Noticia</a>
+		{% endif %}
+
 	</div>
 	
 		<section class="d-flex flex-wrap">
