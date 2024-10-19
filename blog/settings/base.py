@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 from django.urls import reverse_lazy
+from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.usuarios',
     'apps.noticias',
+    'apps.contacto',
     'ckeditor',
 ]
 
@@ -121,3 +123,13 @@ CKEDITOR_UPLOAD_PATHS = 'uploads/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Configuracion de email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'wanomainformatorio@gmail.com'
+DEFAULT_FROM_EMAIL = "wanomainformatorio@gmail.com"
+NOTIFY_EMAIL = "wanomainformatorio@gmail.com"
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
