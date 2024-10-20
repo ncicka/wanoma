@@ -1,5 +1,4 @@
-from django.db.models.query import QuerySet
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from django.contrib.auth.decorators import login_required
 
@@ -118,7 +117,10 @@ class Editar_Noticia(UpdateView):
 		context['titulo']='EDITAR LA NOTICIA'
 		return context
 
- 
+class Borrar_Noticia(DeleteView):
+	model = Noticia
+	template_name='noticias/confirmar_borrar.html'
+	success_url = reverse_lazy('noticias:listar')
  ## Vistas de Categorias
  
 class Listar_Categoria(ListView):
@@ -160,6 +162,16 @@ class Borrar_Categoria(DeleteView):
 	template_name='noticias/categoria_confirmar_borrar.html'
 	success_url = reverse_lazy('noticias:categoria')
 
+# Vistas de Comentario
+class Borrar_Comentario(DeleteView):
+	model = Comentario
+	template_name='noticias/comentario_confirmar_borrar.html'
+
+	def post(self, request, pk, noticia_pk):
+		comentario = get_object_or_404(Comentario, pk=pk, noticia_id=noticia_pk)
+		comentario.delete()
+		return redirect('noticias:detalle', pk=noticia_pk)
+ 
 #{'nombre':'name', 'apellido':'last name', 'edad':23}
 #EN EL TEMPLATE SE RECIBE UNA VARIABLE SEPARADA POR CADA CLAVE VALOR
 # nombre

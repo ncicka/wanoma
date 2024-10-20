@@ -25,10 +25,11 @@
 				{{ form.categoria_noticia }}
 				</div>	
 				<div class="col-md6">
-					{% if perms.noticia.add_categoria %}
+					{% if perms.noticia.add_noticia %}
 						<a href="{% url 'noticias:agregarcategoria' %}">Agregar Categoria</a>
 					{% endif %}
 				</div>
+
 			</div>
 			<br>
 			<div class="col-md-12 form-group">

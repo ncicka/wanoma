@@ -12,7 +12,7 @@
 			<a href="?id={{cat.pk}}"> {{cat.nombre}} </a>
 		{% endfor %}
 
-		{% if perms.noticia.add_noticia %}
+		{% if user.is_authenticated %}
 			<a class="button primary-button" href="{% url 'noticias:agregar' %}">Agregar Noticia</a>
 		{% endif %}
 
@@ -40,11 +40,16 @@
 						<div class="d-flex justify-content-around">
 							<p class="text-muted fw-light" > 
 								<small class="text-muted">Publicado por: </small>
-								{{noti.fecha}}
+								{{noti.fecha}}{{noti.autor}}
 							</p>
 						</div>
 						<div><cite title="Categoría">{{noti.categoria_noticia}}</cite></div>
-						<div> <a class="btn btn-info" href="{% url 'noticias:editar' noti.pk %}">Editar</a>
+						{% if perms.noticia.update_noticia and user == noti.autor%}
+						<div> <a class="button btn-info" href="{% url 'noticias:editar' noti.pk %}">Editar</a>
+						{% endif %}
+						{% if perms.noticia.delete_noticia and user == noti.autor%}
+							<a class="button btn-info" href="{% url 'noticias:borrar' noti.pk %}">Borrar</a>
+						{% endif %}							
 						 </div>
 					</div>
 				</div>

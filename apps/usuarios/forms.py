@@ -11,6 +11,7 @@ class RegistroForm(UserCreationForm):
         label='Contraseña', widget=forms.PasswordInput, required=True)
     password2 = forms.CharField(
         label='Confirmar Contraseña', widget=forms.PasswordInput, required=True)
+    username=forms.CharField(label='Nombre usuario', required=True)
 
     class Meta:
         model = Usuario
