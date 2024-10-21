@@ -5,13 +5,32 @@
 
 
 {% block contenido %}
-	<h1>{{titulo}}</h1>
+<div class="intro h-10">
 
+</div>
+
+<div class="container">
+
+	<div class="row">
+
+		<div class="text-center section-heading">
+			<h4>{{titulo}}</h4>
+		</div>
+		<br>
+		<br>
+		<div class="text-center">
 		<form enctype="multipart/form-data" method="POST">{% csrf_token %}
             {{form.as_p}}
  
-			<input type="submit" value="GUARDAR">
+			<input class="btn btn-primary" type="submit" value="Guardar">
 		</form>
+		<br>
+		<br>
 		<a href="{% url 'noticias:categoria' %}">Volver</a>
+		<br>
+		<br>
+		</div>
+	</div>
+</div>
 {% endblock contenido %}
 

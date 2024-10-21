@@ -103,8 +103,14 @@ class Agregar_Noticia(CreateView):
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
-		context['titulo']='AGREGAR LA NOTICIA'
+		context['titulo']='AGREGAR NOTICIA'
 		return context
+	
+	def form_valid(self, form):
+		noticia = form.save(commit=False)
+		noticia.autor = self.request.user
+		noticia.save()
+		return super().form_valid(form)
 
 class Editar_Noticia(UpdateView):
 	model=Noticia
@@ -114,7 +120,7 @@ class Editar_Noticia(UpdateView):
  
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
-		context['titulo']='EDITAR LA NOTICIA'
+		context['titulo']='EDITAR NOTICIA'
 		return context
 
 class Borrar_Noticia(DeleteView):

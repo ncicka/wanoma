@@ -25,10 +25,11 @@ class RegistroForm(UserCreationForm):
         ]
     
 class LoginForm(AuthenticationForm):
-    def __init__(self, *args, **kwargs):
-        super(LoginForm,self).__init__(*args,**kwargs)
-        self.fields["username"].widget.attrs.update({'class' : 'form-control','placeholder' : "Nombre de usuario", 'type' : 'text'})
-        self.fields["password"].widget.attrs.update({'class' : 'form-control','placeholder' : "Contraseña", 'type' : 'text'})
+     def __init__(self, *args, **kwargs):
+         super(LoginForm,self).__init__(*args,**kwargs)
+         self.fields["username"].widget.attrs.update({'class' : 'form-control','placeholder' : "Nombre de usuario", 'type' : 'text'})
+         self.fields["password"].widget.attrs.update({'class' : 'form-control','placeholder' : "Contraseña", 'type' : 'text'})
+ 
 
 class UsuarioForm(forms.ModelForm):
     class Meta:

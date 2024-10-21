@@ -5,6 +5,39 @@
 
 
 {% block contenido %}
-	<h2>HOLA SOY EL HOME CON UN CAMBIO</h2>
+	<div class="banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<div class="banner-content">
+						<h6>Home</h6>
+						<h2>El Poder de la Inteligencia Artificial</h2>
+						<ul class="buttons">
+							<li>
+								<div class="primary-button">
+									<a href="{% url 'contacto:contacto' %}">Contacto</a>
+								</div>
+							</li>
+							<li>
+								<div class="secondary-button">
+									<a href="{% url 'noticias:listar' %}">Mas Detalles</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="intro">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h4>Diseño Web &amp; Desarrollo por Wanoma</h4>
+					<h6>Creamos esta página</h6>
+					<div class="border-button"><a href="{% url 'nosotros' %}">Descubre Mas</a></div>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock contenido %}
-

@@ -4,10 +4,53 @@
 {% block titulo %}CONTACTO{% endblock titulo %}
 
 {% block contenido %}
+<div class="intro h-10">
 
-    <form method="post">{% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Enviar Mensaje">
-    </form>
+</div>
+
+    <section id="contact-us">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-heading">
+                        <h4>Contáctanos</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="text-center" id="contact" method="post"> {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                              <fieldset>
+                                {{form.nombre}}
+                              </fieldset>
+                            </div>
+                            <div class="col-md-6">
+                              <fieldset>
+                                {{form.email}}
+                              </fieldset>
+                            </div>
+                            <div class="col-md-12">
+                              <fieldset>
+                                {{form.mensaje}}
+                              </fieldset>
+                            </div>
+                            <div class="col-md-12">
+                              <fieldset>
+                                <button type="submit" id="form-submit" class="btn">Enviar su mensaje</button>
+                              </fieldset>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+ 
+            </div>
+        </div>
+    </section>
+
+
+
+
 
 {% endblock contenido %}

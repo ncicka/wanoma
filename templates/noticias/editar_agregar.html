@@ -5,49 +5,71 @@
 
 
 {% block contenido %}
-	<h1>{{titulo}}</h1>
+<div class="intro h-10">
 
-		<form enctype="multipart/form-data" method="POST">{% csrf_token %}
-            <!-- {{form.as_p}} -->
-			<div class="col-md-12 form-group">
-				{{ form.titulo.label_tag }}
-				{{ form.titulo }}
+</div>
+<div class="container">
+	<div class="row">
+		<div class="text-center section-heading">
+			<h4>{{titulo}}</h4>
+		</div>
+		<div class="col-md-12">
+			<div class="text-center">
+				<form enctype="multipart/form-data" method="POST">{% csrf_token %}
+					<!-- {{form.as_p}} -->
+					<div class="col-md-6 form-group">
+						<div class="col-md-4">
+							{{ form.titulo.label_tag }}
+						</div>
+						<div class="col-md-8">
+							{{ form.titulo }}
+						</div>
+					</div>
+					<div class="col-md-6 form-group">
+							<div class="col-md-4">
+							{{ form.categoria_noticia.label_tag }}
+							</div>
+							<div class="col-md-4">
+								{{ form.categoria_noticia }}
+							</div>
+						<div class="col-md6">
+							{% if user == noti.autor or user.is_superuser %}
+								<a href="{% url 'noticias:agregarcategoria' %}">Agregar Categoria</a>
+							{% endif %}
+						</div>
+
+					</div>
+
+					<br>
+					<div class="col-md-12 form-group">
+						<div class="col-md-6">
+							{{ form.cuerpo.label_tag }}
+						</div>
+						<div class="col-md-12">
+							{{ form.cuerpo }}
+						</div>
+					</div>
+					<br>
+					<br>
+					<div class="col-md-12 form-group">
+						<div class="col-md-4">
+							{{ form.imagen.label_tag }}
+						</div>
+						<div class="col-md-8">
+							{{ form.imagen }}
+						</div>
+					</div>
+					<br>
+
+					<input class="btn btn-primary" type="submit" value="Guardar">
+				</form>
+				<br>
+				<a href="{% url 'noticias:listar' %}">Volver</a>
 			</div>
-			<br>
-			<div class="col-md-12 form-group">
-				{{ form.cuerpo.label_tag }}
-				{{ form.cuerpo }}
-			</div>
-			<br>
-			<div class="col-md-12 form-group">
-				<div class="col-md-6">
-				{{ form.categoria_noticia.label_tag }}
-				{{ form.categoria_noticia }}
-				</div>	
-				<div class="col-md6">
-					{% if perms.noticia.add_noticia %}
-						<a href="{% url 'noticias:agregarcategoria' %}">Agregar Categoria</a>
-					{% endif %}
-				</div>
-
-			</div>
-			<br>
-			<div class="col-md-12 form-group">
-				{{ form.imagen.label_tag }}
-				{{ form.imagen }}
-			</div>
-			<br>
-			<!-- {{form.titulo}}
-
-			{{form.cuerpo}}
-
-			{{form.categoria}}
-
-			{{form.imagen}} -->
-
-			<input type="submit" value="GUARDAR">
-		</form>
+		</div>
+	</div>
+</div>
 		
-		<a href="{% url 'noticias:listar' %}">Volver</a>
+	
 {% endblock contenido %}
 

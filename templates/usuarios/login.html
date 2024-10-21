@@ -1,11 +1,45 @@
 {% extends 'base.html' %}
 
-{% block contenido %}
-			<form method="POST">{%csrf_token%}
-				{{form.errors}}
-				<input type="text" name="username" placeholder="Usuario">
-				<input type="password" name="password" placeholder="Contraseña">
 
-				<input type="submit" name="" value="Login">
-			</form>
+{% block contenido %}
+<div class="intro h-10">
+
+</div>
+
+    <section id="contact-us">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-heading">
+                        <h4>Iniciar Sesión</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="text-center" id="contact" method="post"> {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-4">
+                              <fieldset>
+                                {{form.username}}
+                              </fieldset>
+                            </div>
+                            <div class="col-md-4">
+								<fieldset>
+								  {{form.password}}
+								</fieldset>
+							  </div>
+							  <div class="col-md-16">
+                              <fieldset>
+                                <button type="submit" id="form-submit" class="btn">Iniciar Sesión</button>
+                              </fieldset>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+ 
+            </div>
+        </div>
+    </section>
+
 {% endblock %}

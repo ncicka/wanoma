@@ -18,6 +18,7 @@ from django.urls import path, include
 from . import views
 #URL LOGIN
 from django.contrib.auth import views as auth
+from apps.usuarios.views import LoginUsuario
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -33,7 +34,7 @@ urlpatterns = [
     path('Nosotros/', views.Nosotros, name = 'nosotros'),
 
     #LOGIN
-    path('login/',auth.LoginView.as_view(template_name='usuarios/login.html'),name='login'),
+    path('login/',LoginUsuario.as_view(),name='login'),
     path('logout/',auth.LogoutView.as_view(),name="logout"),
 
     # URL DE APLICACION

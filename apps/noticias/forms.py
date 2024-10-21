@@ -12,7 +12,11 @@ class NoticiaForm(forms.ModelForm):
         model = Noticia
         fields = ('titulo', 'cuerpo', 'categoria_noticia', 'imagen')
         widgets = {
-            'cuerpo': CKEditorWidget()
+            'cuerpo': CKEditorWidget(),
+            'titulo': forms.TextInput(attrs={'class':'form-control',
+                                             'label':'Título'}),
+            'categoria_noticia': forms.Select(attrs={'class':'form-control',
+                                                     'label':'Categoria'}),
         }
     
 

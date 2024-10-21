@@ -3,62 +3,98 @@
 
 {% block titulo %}NOTICIAS{% endblock titulo %}
 
-
 {% block contenido %}
-	<div class="submenu">
+<div class="intro h-10">
 
-		<a href="{% url 'noticias:listar' %}">TODAS</a>
-		{% for cat in categorias %}
-			<a href="?id={{cat.pk}}"> {{cat.nombre}} </a>
-		{% endfor %}
-
-		{% if user.is_authenticated %}
-			<a class="button primary-button" href="{% url 'noticias:agregar' %}">Agregar Noticia</a>
-		{% endif %}
-
-	</div>
-	
-		<section class="d-flex flex-wrap">
-			{% for noti in noticias %}
-			 <div class="col-12 col-lg-3 col-lx-3">
-				<div class="card m-4">
-					<img class="card-img-top" height="200px" src="{{noti.imagen.url}}">
-						
-					<div class="card-body">
-						<h5>
-							<a class="card-title" href="{% url 'noticias:detalle' noti.pk   %}">{{noti.titulo}}</a>
-						</h5>
-						
-						<h6 class="card-subtitle text-muted">
-							<span class="d-inline-block" style="max-width:80%;">
-								{{noti.cuerpo|safe|truncatechars:100}}	
-							</span>
-						</h6>
-					</div>
-					
-					<div class="card-footer">
-						<div class="d-flex justify-content-around">
-							<p class="text-muted fw-light" > 
-								<small class="text-muted">Publicado por: </small>
-								{{noti.fecha}}{{noti.autor}}
-							</p>
+</div>
+	<section class="tabs-content" id="blog">
+		<div class="container">
+			
+			<div class="row">
+				<form class="col-md-12 section-heading" action="{% url 'noticias:listar' %}" method="get">
+					<div class="row">
+						<div class="col-md-8 form-group">
+							{{ filtro_form.id.label_tag }}
+							{{ filtro_form.id }}
 						</div>
-						<div><cite title="Categoría">{{noti.categoria_noticia}}</cite></div>
-						{% if perms.noticia.update_noticia and user == noti.autor%}
-						<div> <a class="button btn-info" href="{% url 'noticias:editar' noti.pk %}">Editar</a>
-						{% endif %}
-						{% if perms.noticia.delete_noticia and user == noti.autor%}
-							<a class="button btn-info" href="{% url 'noticias:borrar' noti.pk %}">Borrar</a>
-						{% endif %}							
-						 </div>
+						<div class="col-md-4 form-group">
+							{{ filtro_form.fecha_desde.label_tag }}
+							{{ filtro_form.fecha_desde }}
+						</div>
+						<div class="col-md-4 form-group">
+							{{ filtro_form.fecha_hasta.label_tag }}
+							{{ filtro_form.fecha_hasta }}
+						</div>					
+						<div class="col-md-4 form-group">
+							{{ filtro_form.orden_antiguedad.label_tag }}
+							{{ filtro_form.orden_antiguedad }}
+						</div>										
+						<div class="col-md-4 form-group">
+							{{ filtro_form.orden_alfabetico.label_tag }}
+							{{ filtro_form.orden_alfabetico }}
+						</div>										
 					</div>
+					<div class="row">
+						<div class="row col-md-6">
+							<button class="btn btn-primary my-2 my-sm-0 col-md-2" type="submit">
+							Filtrar
+							</button>
+						</div>
+						<div class="row col-md-6">
+							{% if user.is_authenticated %}
+								<a class="button primary-button" href="{% url 'noticias:agregar' %}">Agregar Noticia</a>
+							{% endif %}
+						</div>
+	
+					</div>
+				</form>				
+			</div>
+
+
+			<div class="row">
+				<div class=" wrapper"></div>
+					{% for noti in noticias %}
+
+					<div class="col-md-6">
+						<div id="first-tab-group" class="tabgroup">
+							<!-- <div id="tab1"> -->
+							<div class="card">
+								<img src="{{noti.imagen.url}}" alt="">
+								<div class="text-content">
+									<h4>{{noti.titulo}}</h4>
+									<h6><ul class="info-post">
+										<li><i class="fa fa-user"></i>{{noti.autor}}</li>
+										<li><i class="fa fa-calendar"></i>{{noti.fecha|date}}</li>
+											<!-- <li><i class="fa fa-wechat"></i>12 Comments</li> -->
+									</ul></h6>
+									<p>{{noti.cuerpo|safe|truncatechars:100}}</p>
+									<div class="primary-button">
+										<a href="{% url 'noticias:detalle' noti.pk   %}">Continue Leyendo
+										</a>
+									</div>
+									<div class="row">
+										<div class="col-md-4">
+											{% if user == noti.autor or user.is_superuser %}
+									 		<a class="button primary-button" href="{% url 'noticias:editar' noti.pk %}">Editar</a>
+											{% endif %}
+										</div>
+										<div class="col-md-4">
+											{% if user == noti.autor or user.is_superuser %}
+												<a class="button primary-button" href="{% url 'noticias:borrar' noti.pk %}">Borrar</a>
+											{% endif %}							
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- </div> -->
+						</div>
+					</div>
+					{% endfor %}
 				</div>
 			</div>
-			{% endfor %}
-		</section>
+
+		 </div> <!--Container -->
+
+	</section>
 	
-
 {% endblock contenido %}
-
-
-

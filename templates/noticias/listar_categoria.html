@@ -5,29 +5,62 @@
 
 
 {% block contenido %}
+<div class="intro h-10">
 
-    <h1>{{titulo}}</h1>
-	<div class="submenu">
-		{% if perms.noticia.add_categoria %}
-			<a class="button primary-button" href="{% url 'noticias:agregarcategoria' %}">Agregar Categoria</a>
-            <a href="{% url 'noticias:listar' %}">Volver</a>
-		{% endif %}
+</div>
 
-	</div>
-        <h4> LISTA DE CATEGORIAS </h4>
-	
-        	 <div class="row">
-                {% for cat in categorias %}
-                    <p class="card-title" >{{cat.nombre}}</p>
+<div class="container">
+
+	<div class="row">
+
+		<div class="text-center section-heading">
+			<h4>Lista de Categorias</h4>
+		</div>
+		<br>
+		<br>
+		<div class="text-center">
+
+            <div class="submenu">
+                {% if perms.noticia.add_categoria %}
+                    <div class="col-md-6">
+                    <a class="btn btn-primary" href="{% url 'noticias:agregarcategoria' %}">Agregar Categoria</a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="{% url 'noticias:listar' %}">Volver</a>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+            <br>
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            {% for cat in categorias %}
+                <div class="col-md-8">
+                    <p> {{cat.nombre}}</p>
+                </div>
+                <div class="col-md-4">
+
                     {% if perms.noticia.update_categoria %}
-                        <a href="{% url 'noticias:editarcategoria' cat.pk %}">Modificar</a>
+                    <div class="col-md-6">
+                        <a href="{% url 'noticias:editarcategoria' cat.pk %}">Editar</a>
+                    </div>
                     {% endif %}
                     {% if perms.noticia.delete_categoria %}
-                        <a href="{% url 'noticias:borrarcategoria' cat.pk %}">Borrar</a>
+                        <div class="col-md-6">
+                            <a href="{% url 'noticias:borrarcategoria' cat.pk %}">Borrar</a>
+                        </div>
                     {% endif %}
-                {% endfor %}
-            </div>
-	
+                </div>
+            {% endfor %}
+        </div>
+        <br>
+        <br>
+        <br>
+    </div>
+</div>
             
 {% endblock contenido %}
 
